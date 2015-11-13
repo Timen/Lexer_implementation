@@ -15,6 +15,35 @@ int lineCounter=1;
 <MULTILINECOMMENT>"*"+[^*/\n]* 
 <MULTILINECOMMENT>\n {lineCounter++;}
 <MULTILINECOMMENT>"*"+"/" {BEGIN(INITIAL);}
+int { printf("TYPE");}
+float { printf("TYPE");}
+bool { printf("TYPE");}
+void { printf("TYPE");}
+i?"vec"[234] { printf("TYPE");}
+rt_Primitive { printf("TYPE");}
+rt_Camera { printf("TYPE");}
+rt_Material { printf("TYPE");}
+rt_Texture { printf("TYPE");}
+rt_Light { printf("TYPE");}
+
+attribute { printf("QUALIFIER");}
+uniform { printf("QUALIFIER");}
+varying { printf("QUALIFIER");}
+const { printf("QUALIFIER");}
+public { printf("QUALIFIER");}
+private { printf("QUALIFIER");}
+scratch { printf("QUALIFIER");}
+
+"rt_"({letter}|{digit})+ { printf("STATE");}
+
+{letter}({letter}|{digit})* { printf(IDENTIFIER);}
+[+-]"."{digit}*	{ printf( "FLOAT"; }
+[+-]{digit}+"."{digit}*	{ printf( "FLOAT"; }
+"."{digit}*	{ printf( "FLOAT"; }
+{digit}+"."{digit}*	{ printf( "FLOAT"; }
+
+: { printf(COLON);}
+; { printf(SEMICOLON);}
 
 "//".*"\n" {lineCounter++;}
 
